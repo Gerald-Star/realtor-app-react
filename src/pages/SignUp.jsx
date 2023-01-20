@@ -3,6 +3,11 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import {toast} from "react-toastify"
 
 export default function SignUp() {
   //create another hook to show the variable password
@@ -18,6 +23,10 @@ export default function SignUp() {
   //destructure name, email and password to use the value on the form
   const {name, email, password } = formData;
 
+  //initialize the react router hook use Navigate 
+  //and set the navigate to the homepage down the page on catch error 
+  const navigate = useNavigate()
+
   //create onChange function
   function onChange(e) {
     // console.log(e.target.value);
@@ -26,6 +35,46 @@ export default function SignUp() {
       [e.target.id]: e.target.value,
     }));
   }
+
+
+
+
+  async function onSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+
+
+
+      const user = userCredential.user;
+      console.log(user)
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+      toast.success("Sign up was successful");
+      // navigate("/");
+      navigate("/")
+    } catch (error) {
+      //console.log(error)
+      //instead of console the error we toast the error message
+       toast.error("Error in registration");
+    }
+  }
+
+
+
 
   return (
     <section>
@@ -42,8 +91,11 @@ export default function SignUp() {
           />
         </div>
 
+         {/* add the onSubmit for the firebase form here 
+        and set the onSubmit function up*/}
+
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form>
+          <form onSubmit={onSubmit} >
             <input
               type="text"
               id="name"
@@ -80,7 +132,7 @@ export default function SignUp() {
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               ) : (
-                <AiFillEyeInvisible
+                <AiFillEye
                   className="absolute right-3 top-3 text-xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
