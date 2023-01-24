@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
+
 
 export default function SignIn() {
   //create another hook to show the variable password
@@ -17,6 +20,8 @@ export default function SignIn() {
   //destructure email and password to use the value on the form
   const { email, password } = formData;
 
+  const navigate = useNavigate();
+
   //create onChange function
   function onChange(e) {
     // console.log(e.target.value);
@@ -25,6 +30,30 @@ export default function SignIn() {
       [e.target.id]: e.target.value,
     }));
   }
+
+  //create the onSubmit function using promise async and await.
+  //create the auth function using the getAuth 
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+
+
+    const auth = await getAuth();
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    
+    //create the navigate to the home page and set the useNavigate hook on top.
+      if (userCredential.user) {
+        navigate("/")
+      }
+  
+  } catch (error) {
+      toast.error("Error submitting form")
+      
+    }
+  }
+
+
 
   return (
     <section>
@@ -42,7 +71,8 @@ export default function SignIn() {
         </div>
 
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form>
+
+          <form onSubmit={onSubmit}>
             <input
               type="email"
               id="email"
