@@ -14,7 +14,7 @@ import CreateListing from "./pages/CreateListing";
 
 function App() {
   return (
-    <>
+    <div>
       <Router>
         <Header />
         <Routes>
@@ -49,7 +49,7 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-    </>
+    </div>
   );
 }
 

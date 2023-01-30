@@ -51,6 +51,7 @@ export default function CreateListing() {
     longitude,
     images,
   } = formData;
+  
   function onChange(e) {
     let boolean = null;
     if (e.target.value === "true") {
