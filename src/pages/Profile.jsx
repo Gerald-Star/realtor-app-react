@@ -162,6 +162,7 @@ export default function Profile() {
             <h2 className="text-2xl text-center font-semibold mb-6">
               My Listings
             </h2>
+            {/* mapping of the listing using map() function*/}
             <ul className="sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               {listings.map((listing) => (
                 <ListingItem
