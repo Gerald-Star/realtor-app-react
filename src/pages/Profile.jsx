@@ -89,6 +89,7 @@ export default function Profile() {
       toast.success("Successfully deleted the listing");
     }
   }
+  
   function onEdit(listingID) {
     navigate(`/edit-listing/${listingID}`);
   }
