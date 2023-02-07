@@ -32,7 +32,10 @@ export default function ListingItem({listing, id, onEdit, onDelete}) {
               <p className='font-bold text-blue-600'> 
                 $ {listing.offer 
                   ? listing.discountedPrice.toString()
-                  : listing.regularPrice.toString()}
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+                  : listing.regularPrice.toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   
                   {listing.type === "rent" && " / month"}
               </p>
