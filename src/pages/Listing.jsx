@@ -2,6 +2,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useEffect } from 'react'
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getAuth } from "firebase/auth";
 import Spinner from '../components/Spinner';
 import { db } from '../firebase';
 import {Swiper, SwiperSlide} from "swiper/react"
@@ -9,6 +10,7 @@ import SwiperCore, {EffectFade, Autoplay, Navigation, Pagination} from "swiper"
 import "swiper/css/bundle";
 import { FaShare, FaMapMarkerAlt, FaBed, FaBath, FaParking } from 'react-icons/fa';
 import { MdChair} from 'react-icons/md';
+import ContactForm from "../components/ContactForm";
 
 
 // to get listing id use param from react router dom and create a const param
@@ -17,11 +19,12 @@ import { MdChair} from 'react-icons/md';
 //to get the data, use docSnap and set await to getDoc(docRef)
 
 export default function Listing() {
-    // const auth = getAuth();
+    const auth = getAuth()  ;
     const params = useParams();
     const [listing, setListing] = useState(null);
     const [loading, setLoading] = useState(true);
     const [shareLinkCopy, setShareLinkCopy] = useState(false);
+    
     // const [contactLandlord, setContactLandlord] = useState(false);
     SwiperCore.use([Autoplay, Navigation, Pagination]);
     useEffect(() => {
@@ -54,7 +57,7 @@ export default function Listing() {
         {listing.imgUrls.map((url, index) => (
           <SwiperSlide key={index}>
             <div
-              className="relative w-full overflow-hidden h-[300px]"
+              className="relative z-10 w-full overflow-hidden h-[300px]"
               style={{
                 background: `url(${listing.imgUrls[index]}) center no-repeat`,
                 backgroundSize: "cover",
@@ -65,8 +68,8 @@ export default function Listing() {
       </Swiper>
 
       <div
-        className="fixed top-[13%] right-[3%] z-10 bg-white cursor-pointer
-             border-2 border-red-400 rounded-full w-12 h-12 flex justify-center items-center"
+        className="fixed top-[13%] right-[1%] z-10 bg-white cursor-pointer
+             border-2 border-red-300 rounded-full w-9 h-12 flex justify-center items-center"
         onClick={() => {
           navigator.clipboard.writeText(window.location.href);
           setShareLinkCopy(true);
@@ -87,17 +90,16 @@ export default function Listing() {
         </p>
       )}
 
-        {/* Dashboard for banner description and map location*/}
+
+      {/* Dashboard for banner description and map location*/}
       <div
         className="m-4 flex flex-col md:flex-row max-w-6xl lg:mx-auto p-4 
-        rounded-lg shadow-lg border-5 bg-white lg:space-x-5 "
+        rounded-lg shadow-2xl border-5 bg-white lg:space-x-5 "
       >
+        {/* Banner description */}
 
-         {/* Banner description */}
-
-        <div className="bg-pink-300 w-full h-[200px] lg-[400px]">
-
-           {/* Heading content */}
+        <div className="bg-pink-300 w-full h-[200px] lg-[400px] drop-shadow-2xl">
+          {/* Heading content */}
 
           <p className=" text-2xl font-semibold mt-3 mb-1 ml-5 text-blue-700">
             {listing.name} - ${" "}
@@ -111,93 +113,87 @@ export default function Listing() {
             {listing.type === "rent" ? " / month" : ""}
           </p>
 
-               {/* Address icon mapping*/}
+          {/* Address icon mapping*/}
 
           <p className="flex items-center text-center font-semibold mt-1 mb-1">
             <FaMapMarkerAlt className="text-green-700 mr-2 ml-5" />
             {listing.address}
           </p>
 
-           {/* Start: Sale/Rent, Discount listings and Description listing*/}
+          {/* Start: Sale/Rent, Discount listings and Description listing*/}
 
           <div className="flex justify-start items-center space-x-4 w-[75%] ml-5">
-
-              {/* Sale/Rent listing*/}
+            {/* Sale/Rent listing*/}
             <p
-              className="bg-blue-800 w-full max-w-[200px] p-1 rounded-md text-white 
-              text-center font-semibold shadow-lg"
+              className=" bg-indigo-500 shadow-lg shadow-indigo-500/50 w-full max-w-[200px] 
+              p-1 rounded-md text-white text-center font-semibold"
             >
               {listing.type === "rent" ? "Rent" : "Sale"}
             </p>
 
-             {/* Discount listing*/}
+            {/* Discount listing*/}
 
             {listing.offer && (
-              <p className="w-full max-w-[200px] bg-red-800 rounded-md p-1 text-center text-white font-semibold shadow-lg">
+              <p
+                className="w-full max-w-[200px] bg-red-800 shadow-lg shadow-red-500/50 rounded-md 
+              p-1 text-center text-white font-semibold"
+              >
                 ${+listing.regularPrice - +listing.discountedPrice} Discount{" "}
               </p>
             )}
           </div>
 
-               {/* Description */}
+          {/* Description */}
 
-          <p className='mt-2 mb-2 ml-5'> 
-          <span className='font-semibold'>Description - </span>
-          {listing.description}
-          
+          <p className="mt-2 mb-2 ml-5">
+            <span className="font-semibold">Description - </span>
+            {listing.description}
           </p>
 
-              {/* Bedroom and Bathroom Icons/listing*/}
+          {/* Bedroom and Bathroom Icons/listing*/}
 
-          <ul  className='flex items-center ml-5 space-x-3 sm:space-x-10 font-semibold text-sm '>
+          <ul className="flex items-center ml-5 space-x-3 sm:space-x-10 font-semibold text-sm ">
+            {/* Bedroom Icons/listing*/}
+            <li className="flex items-center whitespace-nowrap">
+              <FaBed className="text-lg text-red-800 mr-1" />
 
-              {/* Bedroom Icons/listing*/}
-              <li className='flex items-center whitespace-nowrap'>
-                <FaBed  className='text-lg text-red-800 mr-1'/>
+              {+listing.bedrooms > 1 ? `${listing.bedrooms} Beds ` : "1 Bed"}
+            </li>
 
-                {+listing.bedrooms > 1 ? `${listing.bedrooms } Beds ` : "1 Bed"}
-              
-              </li>
+            {/* Bathroom Icons/listing*/}
+            <li className="flex items-center whitespace-nowrap">
+              <FaBath className="text-lg text-red-800 mr-1" />
 
-                 {/* Bathroom Icons/listing*/}
-              <li className='flex items-center whitespace-nowrap'>
-                <FaBath  className='text-lg text-red-800 mr-1'/>
+              {+listing.bathrooms > 1 ? `${listing.bathrooms} Baths ` : "1 Bed"}
+            </li>
 
-                {+listing.bathrooms > 1 ? `${listing.bathrooms } Baths ` : "1 Bed"}
-              
-              </li>
+            {/* Parking Icons/listing*/}
+            <li className="flex items-center whitespace-nowrap">
+              <FaParking className="text-lg text-red-800 mr-1" />
 
-               {/* Parking Icons/listing*/}
-               <li className='flex items-center whitespace-nowrap'>
-               <FaParking  className='text-lg text-red-800 mr-1'/>
+              {listing.parking ? "Parking spot" : "No parking spot"}
+            </li>
 
-               {listing.parking ? "Parking spot" : "No parking spot"}
-             
-             </li>
-
-              {/* Furnished Icons/listing*/}
-              <li className='flex items-center whitespace-nowrap'>
-              <MdChair  className='text-lg text-red-800 mr-1'/>
+            {/* Furnished Icons/listing*/}
+            <li className="flex items-center whitespace-nowrap">
+              <MdChair className="text-lg text-red-800 mr-1" />
 
               {listing.furnished ? "Furnished" : "Not furnished"}
-            
             </li>
-          
           </ul>
-
-
         </div>
-
-         {/* End of banner description*/}
-
-
-          {/* Start of map location*/}
 
         <div
           className="bg-blue-300 w-full h-[200px] lg-[400px] 
-          z-10 overflow-x-hidden"
+        z-10 overflow-x-hidden shadow-2xl "
         ></div>
       </div>
+
+       
+      <ContactForm />
+      
+
+
 
 
     </main>
