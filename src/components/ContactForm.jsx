@@ -21,8 +21,8 @@ function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-      <div className="mb-10">
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md ml-12 mr-12">
+      <div className="mb-4">
         <label
           htmlFor="subject"
           className=" w-3/6 block text-gray-700 font-medium mb-2"
@@ -38,10 +38,10 @@ function ContactForm() {
           className=" w-3/6 border border-gray-400 p-2"
         />
       </div>
-      <div className="mb-6">
+      <div className="mb-4">
         <label
           htmlFor="email"
-          className=" w-3/6 block text-gray-700 font-medium mb-2"
+          className=" w-3/6 block text-gray-700 font-medium"
         >
           Email
         </label>
