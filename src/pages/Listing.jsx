@@ -99,10 +99,10 @@ export default function Listing() {
       >
         {/* Banner description */}
 
-        <div className="bg-pink-300 w-full h-[200px] lg-[400px] drop-shadow-2xl">
+        <div className="bg-pink-300 w-full h-[220px] lg-[420px] drop-shadow-2xl">
           {/* Heading content */}
 
-          <p className=" text-2xl font-semibold mt-3 mb-1 ml-5 text-blue-700">
+          <p className=" text-1xl font-semibold mt-3 mb-1 ml-5 text-blue-600">
             {listing.name} - ${" "}
             {listing.offer
               ? listing.discountedPrice
@@ -186,8 +186,8 @@ export default function Listing() {
 
               {/*Implement mapping using leaflet  */}
         <div
-          className="bg-blue-300 w-full h-[200px] lg-[400px] 
-        z-10 overflow-x-hidden shadow-2xl mt-5"
+          className="bg-blue-300 w-full h-[220px] lg-[420px] 
+        z-10 overflow-x-hidden shadow-2xl  "
         >
 
     <MapContainer center={[listing.geolocation.lat, listing.geolocation.lng]} 
