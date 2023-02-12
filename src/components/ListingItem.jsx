@@ -12,7 +12,7 @@ export default function ListingItem({listing, id, onEdit, onDelete}) {
       <li className="relative bg-white flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150 m-[10px]">
         <Link className="contents" to={`/category/${listing.type}/${id}`}>
           <img className="h-[170px] w-full object-cover hover:scale-105 transition-scale duration-200 ease-in" loading="lazy" src={listing.imgUrls[0]}
-          alt="" />
+          alt="pic" />
 
           <Moment
             className="absolute top-2 left-2 bg-[#3377cc] text-white uppercase text-xs font-semibold rounded-md px-2 py-1 shadow-lg"

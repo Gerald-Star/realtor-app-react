@@ -37,29 +37,21 @@ export default function Slider() {
   if (loading) {
     return <Spinner />;
   }
-
-
-
-
-
-
   if (listings.length === 0) {
     return <div></div>;
   }
-
   return (
     listings && (
       <div>
         <Swiper
           slidesPerView={1}
           navigation
-          pagination={{type:"progressbar"}}
+          pagination={{ type: "progressbar" }}
           effect="fade"
           modules={[EffectFade]}
           autoplay={{ delay: 3000 }}
         >
           {listings.map(({ data, id }) => (
-
             <SwiperSlide
               key={id}
               onClick={() => navigate(`/category/${data.type}/${id}`)}

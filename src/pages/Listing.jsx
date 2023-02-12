@@ -2,7 +2,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useEffect } from 'react'
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAuth } from "firebase/auth";
+// import { getAuth } from "firebase/auth";
 import Spinner from '../components/Spinner';
 import { db } from '../firebase';
 import {Swiper, SwiperSlide} from "swiper/react"
@@ -20,7 +20,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 //to get the data, use docSnap and set await to getDoc(docRef)
 
 export default function Listing() {
-    const auth = getAuth()  ;
+    // const auth = getAuth();
     const params = useParams();
     const [listing, setListing] = useState(null);
     const [loading, setLoading] = useState(true);

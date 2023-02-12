@@ -15,6 +15,7 @@ import EditListing from "./pages/EditListing";
 import Listing from "./pages/Listing";
 
 
+
 function App() {
   return (
     <div>
@@ -59,7 +60,7 @@ function App() {
         theme="dark"
       />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
