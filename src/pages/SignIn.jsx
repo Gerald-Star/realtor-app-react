@@ -57,7 +57,7 @@ export default function SignIn() {
 
   return (
     <section>
-      <h1 className="text-3xl text-center mt-6 font-bold
+      <h1 className="text-3xl text-blue-700 text-center mt-6 font-bold
       items-center px-6 py-12 max-w-6xl mx-auto">
       Sign In</h1>
 

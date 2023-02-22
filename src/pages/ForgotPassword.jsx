@@ -56,8 +56,6 @@ export default function ForgotPassword() {
 
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
 
-       
-
           <form onSubmit={onSubmit}>
             <input
               type="email"
@@ -77,8 +75,8 @@ export default function ForgotPassword() {
                 Don't have an account?
                 <Link
                   to="/sign-up"
-                  className="text-red-600 hover:text-red-700 
-                  transition duration-200 ease-in-out ml-1"
+                  className="text-red-700 hover:text-red-800 
+                  transition duration-300 ease-in-out ml-1"
                 >
                   Register
                 </Link>

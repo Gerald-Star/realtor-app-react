@@ -66,10 +66,6 @@ export default function OAuth() {
       
     }}
 
-
-
-
-
   return (
     <button type="button" onClick={onGoogleClick}
     

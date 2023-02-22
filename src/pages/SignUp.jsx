@@ -37,8 +37,6 @@ export default function SignUp() {
   }
 
 
-
-
   async function onSubmit(e) {
     e.preventDefault();
 
@@ -53,8 +51,6 @@ export default function SignUp() {
       updateProfile(auth.currentUser, {
         displayName: name,
       });
-
-
 
       const user = userCredential.user;
       console.log(user)
@@ -74,11 +70,9 @@ export default function SignUp() {
   }
 
 
-
-
   return (
     <section>
-      <h1 className="text-3xl text-center mt-6 font-bold
+      <h1 className="text-3xl text-blue-700 text-center mt-6 font-bold
       items-center px-6 py-12 max-w-6xl mx-auto">
       Sign Up</h1>
 

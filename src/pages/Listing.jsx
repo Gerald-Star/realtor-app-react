@@ -207,11 +207,9 @@ export default function Listing() {
              
   </div>
   </div>
-
-       
+   
     <ContactForm />
       
-
     </main>
   );
 }

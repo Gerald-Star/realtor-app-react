@@ -19,13 +19,10 @@ export default function Offers() {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
   const [lastFetchListing, setLastFetchListing] = useState(null)
-  
-
 
   useEffect(()=> {
 
     async function fetchListings() {
-
 
       try {
         const listingRef = collection(db, 'listings' );
