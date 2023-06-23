@@ -3,11 +3,15 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import OAuth from "../components/OAuth";
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   //create another hook to show the variable password
@@ -21,11 +25,11 @@ export default function SignUp() {
   });
 
   //destructure name, email and password to use the value on the form
-  const {name, email, password } = formData;
+  const { name, email, password } = formData;
 
-  //initialize the react router hook use Navigate 
-  //and set the navigate to the homepage down the page on catch error 
-  const navigate = useNavigate()
+  //initialize the react router hook use Navigate
+  //and set the navigate to the homepage down the page on catch error
+  const navigate = useNavigate();
 
   //create onChange function
   function onChange(e) {
@@ -35,7 +39,6 @@ export default function SignUp() {
       [e.target.id]: e.target.value,
     }));
   }
-
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -53,7 +56,7 @@ export default function SignUp() {
       });
 
       const user = userCredential.user;
-      console.log(user)
+      console.log(user);
       const formDataCopy = { ...formData };
       delete formDataCopy.password;
       formDataCopy.timestamp = serverTimestamp();
@@ -61,20 +64,22 @@ export default function SignUp() {
       await setDoc(doc(db, "users", user.uid), formDataCopy);
       toast.success("Sign up was successful");
       // navigate("/");
-      navigate("/")
+      navigate("/");
     } catch (error) {
       //console.log(error)
       //instead of console the error we toast the error message
-       toast.error("Error in registration");
+      toast.error("Error in registration");
     }
   }
 
-
   return (
     <section>
-      <h1 className="text-3xl text-blue-700 text-center mt-6 font-bold
-      items-center px-6 py-12 max-w-6xl mx-auto">
-      Sign Up</h1>
+      <h1
+        className="text-3xl text-blue-700 text-center mt-6 font-bold
+      items-center px-6 py-12 max-w-6xl mx-auto"
+      >
+        Sign Up
+      </h1>
 
       <div className="flex justify-center flex-wrap">
         <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
@@ -85,11 +90,11 @@ export default function SignUp() {
           />
         </div>
 
-         {/* add the onSubmit for the firebase form here 
+        {/* add the onSubmit for the firebase form here 
         and set the onSubmit function up*/}
 
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form onSubmit={onSubmit} >
+          <form onSubmit={onSubmit}>
             <input
               type="text"
               id="name"
@@ -140,7 +145,8 @@ export default function SignUp() {
                 <Link
                   to="/sign-in"
                   className="text-red-600 hover:text-red-700 
-                 transition duration-200 ease-in-out ml-1">
+                 transition duration-200 ease-in-out ml-1"
+                >
                   Sign in
                 </Link>
               </p>
@@ -148,7 +154,7 @@ export default function SignUp() {
               <p>
                 <Link
                   to="/forgot-password"
-                  className="text-blue-600 hover:text-blue-800 
+                  className="text-cyan-700 hover:text-cyan-800 
                   transition duration-200 ease-in-out"
                 >
                   Forgot password?
@@ -157,20 +163,20 @@ export default function SignUp() {
             </div>
 
             <button
-              className="w-full bg-blue-700 text-white px-7 py-3 text-sm 
-              font-medium uppercase rounded shadow-md hover:bg-blue-800
+              className="w-full bg-cyan-700 text-white px-7 py-3 text-sm 
+              font-medium uppercase rounded shadow-md hover:bg-cyan-800
               transition duration-150 ease-in-out hover:shadow-lg
-             active:bg-blue-900"
+             active:bg-cyan-900"
               type="submit"
             >
               Sign up
             </button>
 
-           
             <div
               className="flex items-center my-4 
               before:border-t  before:flex-1  before:border-gray-300
-              after:border-t after:flex-1 after:border-gray-300">
+              after:border-t after:flex-1 after:border-gray-300"
+            >
               <p className="text-center font-semibold mx-4">OR</p>
             </div>
 

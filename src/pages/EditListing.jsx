@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
@@ -10,12 +9,7 @@ import {
 } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
-import {
-  doc,
-  getDoc,
-  serverTimestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -214,7 +208,9 @@ export default function CreateListing() {
   }
   return (
     <main className="max-w-md px-2 mx-auto">
-      <h1 className="text-3xl text-blue-700 text-center mt-6 font-bold">Edit Listing</h1>
+      <h1 className="text-3xl text-blue-700 text-center mt-6 font-bold">
+        Edit Listing
+      </h1>
       <form onSubmit={onSubmit}>
         <p className="text-lg mt-6 font-semibold">Sell / Rent</p>
         <div className="flex">
@@ -483,4 +479,3 @@ export default function CreateListing() {
     </main>
   );
 }
-         

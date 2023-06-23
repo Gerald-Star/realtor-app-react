@@ -1,4 +1,3 @@
-
 import {
   collection,
   getDocs,
@@ -77,7 +76,6 @@ export default function Home() {
     fetchListings();
   }, []);
 
-
   // Places for sale
   const [saleListings, setSaleListings] = useState(null);
   useEffect(() => {
@@ -114,14 +112,13 @@ export default function Home() {
       <Slider />
 
       <div className="max-w-6xl mx-auto pt-4 space-y-6">
-
-       {/*offer listing */}
+        {/*offer listing */}
 
         {offerListings && offerListings.length > 0 && (
           <div className="m-2 mb-6">
             <h2 className="px-3 text-2xl mt-6 font-semibold">Recent offers</h2>
             <Link to="/offers">
-              <p className="px-3 text-sm text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out">
+              <p className="px-3 text-sm text-orange-700 hover:text-orange-800 transition duration-150 ease-in-out">
                 Show more offers
               </p>
             </Link>
@@ -137,12 +134,14 @@ export default function Home() {
           </div>
         )}
 
-          {/*rent listing */}
+        {/*rent listing */}
         {rentListings && rentListings.length > 0 && (
           <div className="m-2 mb-6">
-            <h2 className="px-3 text-2xl mt-6 font-semibold">Places for rent</h2>
+            <h2 className="px-3 text-2xl mt-6 font-semibold">
+              Places for rent
+            </h2>
             <Link to="/category/rent">
-              <p className="px-3 text-sm text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out">
+              <p className="px-3 text-sm text-orange-700 hover:text-orange-800 transition duration-150 ease-in-out">
                 Show more places for rent
               </p>
             </Link>
@@ -158,12 +157,14 @@ export default function Home() {
           </div>
         )}
 
-          {/*sale listing */}
+        {/*sale listing */}
         {saleListings && saleListings.length > 0 && (
           <div className="m-2 mb-6">
-            <h2 className="px-3 text-2xl mt-6 font-semibold">Places for sale</h2>
+            <h2 className="px-3 text-2xl mt-6 font-semibold">
+              Places for sale
+            </h2>
             <Link to="/category/sale">
-              <p className="px-3 text-sm text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out">
+              <p className="px-3 text-sm text-orange-700 hover:text-orange-800 transition duration-150 ease-in-out">
                 Show more places for sale
               </p>
             </Link>
